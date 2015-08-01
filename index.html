@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+			<script>
+			$(document).ready(function(){
+			    var username;
+			    $("#submit").click(function(){
+				   username=$("#login__username").val();
+				   $.post("http://172.20.10.5:8080/index",{username:username},function(data){        
+					  if(data==='done')           
+					  {
+						 window.location.href="/chatroom";
+					  }
+				   });
+			    });
+			});
+			</script>
+
+
+    
+    
+    
+  </head>
+
+  <body>
+  
+
+    <body class="align">
+
+  <div class="site__container">
+
+    <div class="grid__container">
+	<h1>Welcome.</h2>
+      	
+      	<form action="" method="post" class="form form--login">
+		
+        <div class="form__field">
+          <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
+          <input id="login__username" type="text" class="form__input" placeholder="Username" required>
+        </div>
+
+        <div class="form__field">
+          <input type="submit" id ="submit" value="Enter Chat-Room" onclick="return foo();"/>
+          <script type="text/javascript">
+   			 function foo() {
+   			 
+		   			 var getNode = function(s){
+							return document.querySelector(s);
+						},
+		   			chatName = getNode('.form__input');
+		   			var name = chatName.value;
+		   			whitespacePattern = /^\s*$/;
+					if(whitespacePattern.test(name)){
+						alert("Enter username");
+				
+					}
+			
+					else {
+				
+		   			 	window.location.href = "chatroom";
+			 		  	}
+			 		  return false;
+		 			   }
+		</script>
+		
+		
+        </div>
+       
+   	
+      </form>
+      
+      
+
+    </div>
+
+  </div>
+
+</body>
+    
+    
+    
+    
+    
+  </body>
+</html>
