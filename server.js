@@ -27,28 +27,7 @@ app.post('/index',function(req,res){
 	sess=req.session;
 	sess.username=req.body.username;
 	res.end('done');
-<<<<<<< HEAD
-	
-	});
-	
-	//login
-	app.get('/chatroom',function(req,res){
-		sess=req.session;
-		if(sess.username)	
-		{
-			console.log(sess.username);
-			
-			name = sess.username;
-			
-			res.render('chatroom.html');
-			req.session.reload( function (err) {
-		    		req.session.destroy(function(err) {
-				  // cannot access session here
-				  res.render('index.html');
-				});
-=======
 });
->>>>>>> 78584f5e1ed8cebca87a467abc48e26fa271e24a
 
 app.get('/chatroom',function(req,res){
 	sess=req.session;
@@ -62,32 +41,12 @@ app.get('/chatroom',function(req,res){
 			  res.render('index.html');
 			});
 		})
-<<<<<<< HEAD
-		
-				
-		}
-		
-		else
-		{
-			res.render('index.html');
-		}
-		
-		
-
-	});
-	
-	
-
-
-//mongodb
-=======
 	}else{
 		res.render('index.html');
 	}
 });
 	
 // MongoDB Connection
->>>>>>> 78584f5e1ed8cebca87a467abc48e26fa271e24a
 mongo.connect('mongodb://127.0.0.1/chat',function(err,db){
 	if(err) throw err;
 	client.on('connection',function(socket){
@@ -135,16 +94,9 @@ app.get('/css/style.css', function(req, res){
 });
 
 	
-<<<<<<< HEAD
-
-
-http.listen(8000,'192.168.1.101' ,function(){
-  console.log('listening on *:8000');
-=======
 //http listen port
 http.listen(8080,'172.20.10.5' ,function(){
   console.log('listening on *:8080');
->>>>>>> 78584f5e1ed8cebca87a467abc48e26fa271e24a
 });
 
 
