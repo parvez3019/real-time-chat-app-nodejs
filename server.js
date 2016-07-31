@@ -1,50 +1,50 @@
 
-	var mongo = require('mongodb').MongoClient,
-	app = require('express')();
-	http = require('http').Server(app);
-	client = require('socket.io')(http);
-	session = require('express-session');
-	bodyParser = require('body-parser');
+var mongo = require('mongodb').MongoClient,
+app = require('express')();
+http = require('http').Server(app);
+client = require('socket.io')(http);
+session = require('express-session');
+bodyParser = require('body-parser');
 
-	app.use(session({secret:'123456789',saveUninitialized: true,resave: true}));
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: true}));
-	app.engine('html', require('ejs').renderFile);
-	
-	var sess;
-	
-	app.get('/index.html',function(req,res){
-		sess=req.session;
-		// check username
-		if(sess.username){
-			res.redirect('/chatroom');
-		}else{
-			res.render('index.html');
-		}
-	});
+app.use(session({secret:'123456789',saveUninitialized: true,resave: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.engine('html', require('ejs').renderFile);
 
-	app.post('/index',function(req,res){
-		sess=req.session;
-		sess.username=req.body.username;
-		res.end('done');
-	});
-	
-	app.get('/chatroom',function(req,res){
-		sess=req.session;
-		if(sess.username){
-			console.log(sess.username);
-			name = sess.username;
-			res.render('chatroom.html');
-			req.session.reload( function (err) {
-		    		req.session.destroy(function(err) {
-				  // cannot access session here
-				  res.render('index.html');
-				});
-			})
-		}else{
-			res.render('index.html');
-		}
-	});
+var sess;
+
+app.get('/index.html',function(req,res){
+	sess=req.session;
+	// check username
+	if(sess.username){
+		res.redirect('/chatroom');
+	}else{
+		res.render('index.html');
+	}
+});
+
+app.post('/index',function(req,res){
+	sess=req.session;
+	sess.username=req.body.username;
+	res.end('done');
+});
+
+app.get('/chatroom',function(req,res){
+	sess=req.session;
+	if(sess.username){
+		console.log(sess.username);
+		name = sess.username;
+		res.render('chatroom.html');
+		req.session.reload( function (err) {
+	    		req.session.destroy(function(err) {
+			  // cannot access session here
+			  res.render('index.html');
+			});
+		})
+	}else{
+		res.render('index.html');
+	}
+});
 	
 // MongoDB Connection
 mongo.connect('mongodb://127.0.0.1/chat',function(err,db){
