@@ -45,7 +45,7 @@
 	
 	});
 	
-	
+	//login
 	app.get('/chatroom',function(req,res){
 		sess=req.session;
 		if(sess.username)	
@@ -79,14 +79,7 @@
 	
 
 
-
-
-
-	
-
-
-
-
+//mongodb
 mongo.connect('mongodb://127.0.0.1/chat',function(err,db){
 
 	if(err) throw err;
