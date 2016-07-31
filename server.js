@@ -162,8 +162,8 @@ mongo.connect('mongodb://127.0.0.1/chat',function(err,db){
 	
 
 
-http.listen(8080,'172.20.10.5' ,function(){
-  console.log('listening on *:8080');
+http.listen(8000,'192.168.1.101' ,function(){
+  console.log('listening on *:8000');
 });
 
 
